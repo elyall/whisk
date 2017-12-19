@@ -29,7 +29,7 @@ import numpy
 import trace
 import traj
 import summary
-from ui.whiskerdata import load_trajectories
+# from ui.whiskerdata import load_trajectories
 warnings.simplefilter("default",UserWarning)
 
 def ext_cmp(*args):
@@ -117,3 +117,21 @@ if __name__ == '__main__':
     table.save_to_matlab_file( dst )
   else:
     table.save(dst)
+
+
+def load_trajectories( filename ):
+  trajectories = {}
+  try:
+    f = open( filename, 'r' )
+
+    cur = 0;
+    for line in f:
+      t = [int(x) for x in line.split(',')[:3]]
+      if not t[0] in trajectories:
+        trajectories[t[0]] = {}
+      trajectories[ t[0] ][ t[1] ] = t[2];
+
+    return trajectories, trajectories.keys()[0]
+  except:
+    print "Couldn't open file. Creating: ", filename
+    return {},0
