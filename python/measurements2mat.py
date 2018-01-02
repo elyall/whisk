@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import optparse
 from traj import MeasurementsTable
 from glob import glob
 
@@ -52,7 +53,7 @@ if __name__ == '__main__':
                     dest    = "label",
                     action  = "store",
                     type    = "string",
-                    default = "")
+                    default = "_meas")
 
   options,args = parser.parse_args()
 
